@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Your Profile - Real Estate App
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: 600;">Profile</h1>
+
+    <!-- Profile Image with Icon -->
+    <div class="text-center mb-4">
+        {% if user.profile_image %}
+        <img src="{{ user.profile_image.url }}" alt="Profile Image" class="rounded-circle" width="150" height="150">
+        {% else %}
+        <i class="bi bi-person-circle" style="font-size: 150px; color: #004d40;"></i>
+        {% endif %}
+    </div>
+
+    <!-- User Info Section with Icons -->
+    <div class="mb-4 text-center">
+        <div class="d-flex justify-content-center align-items-center mb-2">
+            <i class="bi bi-person-fill" style="font-size: 1.5rem; color: #004d40;"></i>
+            <p class="ms-3 mb-0"><strong>Username:</strong> {{ user.username }}</p>
+        </div>
+        <div class="d-flex justify-content-center align-items-center mb-2">
+            <i class="bi bi-envelope-fill" style="font-size: 1.5rem; color: #004d40;"></i>
+            <p class="ms-3 mb-0"><strong>Email:</strong> {{ user.email }}</p>
+        </div>
+        <div class="d-flex justify-content-center align-items-center mb-2">
+            <i class="bi bi-telephone-fill" style="font-size: 1.5rem; color: #004d40;"></i>
+            <p class="ms-3 mb-0"><strong>Phone:</strong> {{ user.phone_number }}</p>
+        </div>
+    </div>
+
+    <!-- Buttons Side by Side -->
+    <div class="d-flex justify-content-center gap-3">
+        <!-- Update Profile Button -->
+        <a href="{% url 'update_profile' %}" class="btn btn-primary"
+            style="background-color: #004d40; border-color: #004d40; width: 200px; border-radius: 5px; transition: background-color 0.3s ease;">
+            <i class="bi bi-pencil-square"></i> Update Profile
+        </a>
+
+        <!-- Delete Profile Button -->
+        <form method="post" action="{% url 'delete_profile' %}" class="text-center">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-danger"
+                style="width: 200px; border-radius: 5px; transition: background-color 0.3s ease;"
+                onclick="return confirm('Are you sure you want to delete your profile?');">
+                <i class="bi bi-trash-fill"></i> Delete Profile
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

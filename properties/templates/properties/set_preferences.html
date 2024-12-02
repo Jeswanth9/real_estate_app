@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Set Preferences - Real Estate App
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-4">Set Your Preferences</h1>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="card shadow-sm">
+            <div class="card-body">
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary w-100 mt-3">Save Preferences</button>
+            </div>
+        </div>
+    </form>
+
+    <p class="text-center mt-3"><a href="{% url 'property_list' %}">Back to Property Listings</a></p>
+</div>
+{% endblock %}

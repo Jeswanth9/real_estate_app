@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Update Profile - Real Estate App
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: 600;">Update Profile</h1>
+
+    <!-- Form for Updating Profile -->
+    <form method="post" enctype="multipart/form-data" class="border p-4 rounded shadow-sm">
+        {% csrf_token %}
+
+        <!-- Username -->
+        <div class="mb-3">
+            <label for="username" class="form-label"><i class="bi bi-person-fill" style="font-size: 1.2rem; color: #004d40;"></i> Username</label>
+            <input type="text" name="username" class="form-control" id="username" value="{{ form.username.value }}" required>
+        </div>
+        
+        <!-- Email -->
+        <div class="mb-3">
+            <label for="email" class="form-label"><i class="bi bi-envelope-fill" style="font-size: 1.2rem; color: #004d40;"></i> Email</label>
+            <input type="email" name="email" class="form-control" id="email" value="{{ form.email.value }}" required>
+        </div>
+
+        <!-- Phone Number -->
+        <div class="mb-3">
+            <label for="phone_number" class="form-label"><i class="bi bi-telephone-fill" style="font-size: 1.2rem; color: #004d40;"></i> Phone Number</label>
+            <input type="text" name="phone_number" class="form-control" id="phone_number" value="{{ form.phone_number.value }}" required>
+        </div>
+
+        <!-- Profile Image -->
+        <div class="mb-3">
+            <label for="profile_image" class="form-label"><i class="bi bi-image-fill" style="font-size: 1.2rem; color: #004d40;"></i> Profile Image</label>
+            <input type="file" name="profile_image" class="form-control" id="profile_image">
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary w-100" style="background-color: #004d40; border-color: #004d40; border-radius: 5px; transition: background-color 0.3s ease;">
+            <i class="bi bi-pencil-square"></i> Update
+        </button>
+    </form>
+
+    <!-- Back Button -->
+    <div class="text-center mt-3">
+        <a href="{% url 'profile' %}" class="btn btn-secondary" style="width: 200px; border-radius: 5px; transition: background-color 0.3s ease;">
+            <i class="bi bi-arrow-left-circle-fill"></i> Back to Profile
+        </a>
+    </div>
+</div>
+{% endblock %}

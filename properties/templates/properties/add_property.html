@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Property - Real Estate App
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-4">Add New Property</h1>
+
+    <form method="post" enctype="multipart/form-data" class="shadow p-4 rounded bg-light">
+        {% csrf_token %}
+        
+        <!-- Dynamic form fields rendered -->
+        {{ form.as_p }}
+
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-primary">Add Property</button>
+            <a href="{% url 'property_list' %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

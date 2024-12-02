@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Register - Real Estate App
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: 600;">Register</h1>
+
+    <form method="post" class="border p-4 rounded shadow-sm" style="background-color: #f9f9f9; border-radius: 10px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);">
+        {% csrf_token %}
+        
+        <!-- Username Input with Icon -->
+        <div class="mb-3 input-group">
+            <span class="input-group-text" id="username-icon"><i class="bi bi-person-fill"></i></span>
+            <input type="text" id="id_username" name="username" class="form-control" value="{{ form.username.value|default:'' }}" placeholder="Enter your username" required>
+        </div>
+
+        <!-- Email Input with Icon -->
+        <div class="mb-3 input-group">
+            <span class="input-group-text" id="email-icon"><i class="bi bi-envelope-fill"></i></span>
+            <input type="email" id="id_email" name="email" class="form-control" value="{{ form.email.value|default:'' }}" placeholder="Enter your email" required>
+        </div>
+
+        <!-- Password Input with Icon and Toggle -->
+        <div class="mb-3 input-group">
+            <span class="input-group-text" id="password-icon"><i class="bi bi-lock-fill"></i></span>
+            <input type="password" id="id_password1" name="password1" class="form-control" value="{{ form.password1.value|default:'' }}" placeholder="Enter your password" required>
+            <span class="input-group-text" id="toggle-password" style="cursor: pointer;">
+                <i class="bi bi-eye-slash" id="eye-icon"></i>
+            </span>
+        </div>
+
+        <!-- Confirm Password Input with Icon and Toggle -->
+        <div class="mb-3 input-group">
+            <span class="input-group-text" id="confirm-password-icon"><i class="bi bi-lock-fill"></i></span>
+            <input type="password" id="id_password2" name="password2" class="form-control" value="{{ form.password2.value|default:'' }}" placeholder="Confirm your password" required>
+            <span class="input-group-text" id="toggle-confirm-password" style="cursor: pointer;">
+                <i class="bi bi-eye-slash" id="eye-confirm-icon"></i>
+            </span>
+        </div>
+
+        <!-- Owner Status Checkbox -->
+        <div class="mb-3 form-check">
+            {{ form.is_owner }}
+            <label class="form-check-label" for="id_is_owner">I am an owner</label>
+        </div>
+
+        <!-- Phone Number Input with Icon -->
+        <div class="mb-3 input-group">
+            <span class="input-group-text" id="phone-icon"><i class="bi bi-telephone-fill"></i></span>
+            <input type="text" id="id_phone_number" name="phone_number" class="form-control" value="{{ form.phone_number.value|default:'' }}" placeholder="Enter your phone number" required>
+        </div>
+
+        <!-- Register Button -->
+        <button type="submit" class="btn btn-primary w-100" style="background-color: #004d40; border-color: #004d40; border-radius: 5px; transition: background-color 0.3s ease;">
+            <i class="bi bi-box-arrow-in-right"></i> Register
+        </button>
+    </form>
+
+    <p class="text-center mt-3" style="font-size: 1rem;">Already have an account? <a href="{% url 'login' %}" style="color: #004d40;">Login here</a>.</p>
+</div>
+
+{% block extra_js %}
+<script>
+    // Toggle password visibility
+    document.getElementById('toggle-password').addEventListener('click', function() {
+        var passwordField = document.querySelector('input[name="password1"]');
+        var eyeIcon = document.getElementById('eye-icon');
+        
+        // Toggle the input type between 'password' and 'text'
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            eyeIcon.classList.remove('bi-eye-slash');
+            eyeIcon.classList.add('bi-eye');
+        } else {
+            passwordField.type = 'password';
+            eyeIcon.classList.remove('bi-eye');
+            eyeIcon.classList.add('bi-eye-slash');
+        }
+    });
+
+    // Toggle confirm password visibility
+    document.getElementById('toggle-confirm-password').addEventListener('click', function() {
+        var confirmPasswordField = document.querySelector('input[name="password2"]');
+        var eyeConfirmIcon = document.getElementById('eye-confirm-icon');
+        
+        // Toggle the input type between 'password' and 'text'
+        if (confirmPasswordField.type === 'password') {
+            confirmPasswordField.type = 'text';
+            eyeConfirmIcon.classList.remove('bi-eye-slash');
+            eyeConfirmIcon.classList.add('bi-eye');
+        } else {
+            confirmPasswordField.type = 'password';
+            eyeConfirmIcon.classList.remove('bi-eye');
+            eyeConfirmIcon.classList.add('bi-eye-slash');
+        }
+    });
+</script>
+{% endblock %}
+{% endblock %}

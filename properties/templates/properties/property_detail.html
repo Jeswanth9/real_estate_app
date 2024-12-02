@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}
+{{ property.title }} - Real Estate App
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-8">
+            <!-- Property Title -->
+            <h1 class="mb-4">{{ property.title }}</h1>
+            
+            <!-- Property Image Handling -->
+            {% if property.images %}
+                <img src="{{ property.images.url }}" alt="Property Image" class="img-fluid rounded mb-4 shadow">
+            {% else %}
+                <p class="text-muted">No image available for this property.</p>
+            {% endif %}
+            
+            <!-- Property Details -->
+            <div class="mb-3">
+                <p><i class="fas fa-map-marker-alt"></i> <strong>Location:</strong> {{ property.location }}</p>
+                <p><i class="fas fa-home"></i> <strong>Type:</strong> {{ property.get_property_type_display }}</p>
+                <p><i class="fas fa-rupee-sign"></i> <strong>Price:</strong> ₹{{ property.price }}</p>
+                <p><i class="fas fa-ruler-combined"></i> <strong>Area:</strong> {{ property.area }} m²</p>
+                <p><i class="fas fa-info-circle"></i> <strong>Description:</strong> {{ property.description }}</p>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <!-- Contact Owner Section -->
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">Contact Owner</h5>
+                    
+                    <!-- Owner Details -->
+                    <p><i class="fas fa-user"></i> <strong>Name:</strong> {{ property.owner.get_full_name }}</p>
+                    <p><i class="fas fa-envelope"></i> <strong>Email:</strong> {{ property.owner.email }}</p>
+                    <p><i class="fas fa-phone-alt"></i> <strong>Phone:</strong> {{ property.owner.phone_number }}</p>
+                    
+                    <!-- Check if the owner has any other profile info -->
+                    {% if property.owner.profile %}
+                        <p><i class="fas fa-birthday-cake"></i> <strong>Birthday:</strong> {{ property.owner.profile.birth_date }}</p>
+                        <p><i class="fas fa-map-pin"></i> <strong>Address:</strong> {{ property.owner.profile.address }}</p>
+                    {% endif %}
+
+                    <!-- WhatsApp Link -->
+                    <a href="{{ whatsapp_url }}" target="_blank" class="btn btn-success w-100 text-white">
+                        <i class="fab fa-whatsapp"></i> Message on WhatsApp
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

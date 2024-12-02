@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}
+Loan Calculators - Real Estate App
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-4">Loan Calculators</h1>
+
+    <form method="POST" enctype="multipart/form-data" class="shadow p-4 rounded bg-light">
+        {% csrf_token %}
+
+        <!-- Input Fields -->
+        <section>
+            <h2 class="text-primary">Loan Calculator Inputs</h2>
+            <div class="mb-3">
+                <label for="loan_amount" class="form-label">Loan Amount:</label>
+                <input type="number" name="loan_amount" id="loan_amount" class="form-control"
+                    value="{{ loan_amount }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="annual_rate" class="form-label">Annual Interest Rate:</label>
+                <input type="number" name="annual_rate" id="annual_rate" class="form-control"
+                    value="{{ annual_rate }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="tenure_years" class="form-label">Tenure (in years):</label>
+                <input type="number" name="tenure_years" id="tenure_years" class="form-control"
+                    value="{{ tenure_years }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="monthly_income" class="form-label">Monthly Income:</label>
+                <input type="number" name="monthly_income" id="monthly_income" class="form-control"
+                    value="{{ monthly_income }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="monthly_expenses" class="form-label">Monthly Expenses:</label>
+                <input type="number" name="monthly_expenses" id="monthly_expenses" class="form-control"
+                    value="{{ monthly_expenses }}" required>
+            </div>
+        </section>
+
+        <!-- Calculate Button -->
+        <button type="submit" class="btn btn-primary mb-4">Calculate</button>
+
+        <!-- Results -->
+        <section>
+            <h2 class="text-primary">Results</h2>
+            {% if emi %}
+            <h3 class="mt-3 text-success">EMI: ₹{{ emi }}</h3>
+            {% endif %}
+            {% if max_loan_amount %}
+            <h3 class="mt-3 text-success">Maximum Loan Amount: ₹{{ max_loan_amount }}</h3>
+            {% endif %}
+            {% if max_property_price %}
+            <h3 class="mt-3 text-success">Maximum Property Price: ₹{{ max_property_price }}</h3>
+            {% endif %}
+            {% if total_payable %}
+            <h3 class="mt-3 text-success">Total Payable: ₹{{ total_payable }}</h3>
+            {% endif %}
+            {% if total_interest %}
+            <h3>Total Interest: ₹{{ total_interest }}</h3>
+            {% endif %}
+        </section>
+    </form>
+</div>
+{% endblock %}

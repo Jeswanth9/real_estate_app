@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Delete Profile - Real Estate App
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+    <h1 class="text-center mb-4" style="font-family: 'Montserrat', sans-serif; font-weight: 600;">Delete Profile</h1>
+    
+    <p class="text-center" style="font-size: 1.2rem;">
+        <i class="bi bi-exclamation-triangle-fill" style="font-size: 2rem; color: #ff0000;"></i>
+        Are you sure you want to delete your profile? This action cannot be undone.
+    </p>
+
+    <form method="post" class="text-center">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger w-50" style="border-radius: 5px; font-size: 1.1rem;">
+            <i class="bi bi-trash-fill" style="font-size: 1.2rem;"></i> Yes, delete my profile
+        </button>
+    </form>
+
+    <p class="text-center mt-3">
+        <a href="{% url 'profile' %}" class="btn btn-secondary w-50" style="border-radius: 5px; font-size: 1.1rem;">
+            <i class="bi bi-arrow-left-circle-fill" style="font-size: 1.2rem;"></i> Cancel
+        </a>
+    </p>
+</div>
+{% endblock %}
